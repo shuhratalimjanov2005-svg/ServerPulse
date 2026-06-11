@@ -43,7 +43,7 @@ nano .env
 
 ```text
 API_TOKEN=ваш_секретный_токен_тут
-API_URL=[https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update](https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update)
+API_URL=https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update
 
 ```
 
@@ -105,7 +105,7 @@ Add your details:
 
 ```text
 API_TOKEN=your_token_here
-API_URL=[https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update](https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update)
+API_URL=https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update
 
 ```
 
