@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # Загружаем настройки из файла .env
 load_dotenv()
 
-TOKEN = os.getenv("API_TOKEN")
+TOKEN = os.getenv("API_TOKEN").strip()
 API_URL = os.getenv("API_URL")
 
 if not API_URL:
