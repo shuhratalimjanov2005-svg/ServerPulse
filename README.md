@@ -1,238 +1,164 @@
 ```markdown
-# 🚀 ServerPulse Agent
+# ServerPulse Agent
 
-[![Python Version](https://shields.io)](https://python.org)
-[![License: MIT](https://shields.io)](https://opensource.org)
-[![Status](https://shields.io)]()
-
-Лёгкий и мощный агент для мониторинга вашего сервера в реальном времени.
+[🇷🇺 Русский](#русский) | [🇺🇸 English](#english)
 
 ---
 
-## 🛠️ Быстрый старт (Установка)
+<a name="русский"></a>
+## 🇷🇺 Русский
 
-### 1. Установите Python и pip (если не установлены)
+# Легковесный агент для мониторинга сервера
 
-Откройте терминал и выполните:
+ServerPulse Agent — это инструмент для мониторинга состояния вашего сервера в реальном времени. Мы используем **Docker**, поэтому вам не нужно вручную устанавливать Python или зависимости — всё уже настроено внутри контейнера.
 
+### 🚀 Быстрый старт
+
+#### 1. Установка Docker
+Если Docker еще не установлен, выполните команды:
 ```bash
 sudo apt update
-sudo apt install python3 python3-pip -y
+sudo apt install docker.io docker-compose -y
+sudo systemctl enable --now docker
+
 ```
 
-> 📌 *Если ваша версия Ubuntu или Debian не содержит `python3-pip`, установите pip через `sudo apt install python3-pip` или `sudo apt install python3-venv`. При проблемах поищите в Google: `ubuntu install pip`.*
+#### 2. Настройка конфигурации
 
-### 2. Установите зависимости
-
-Перейдите в папку с агентом и выполните:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Настройте окружение
-
-Скопируйте пример файла настроек:
+Скопируйте файл с примером настроек и создайте рабочий файл:
 
 ```bash
 cp .env.example .env
+
 ```
 
-Отредактируйте `.env` в любом редакторе (nano, vim, etc.):
-
-```env
-API_TOKEN=ваш_секретный_токен
-API_URL=https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update
-```
-
-### 4. Запустите агента
+Откройте файл `.env` для редактирования:
 
 ```bash
-python3 agent.py
+nano .env
+
 ```
 
-> ⚠️ **После перезагрузки сервера агента нужно запускать заново** (см. раздел «Автозапуск» ниже).
+Вставьте туда ваши данные:
 
----
+```text
+API_TOKEN=ваш_секретный_токен_тут
+API_URL=[https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update](https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update)
 
-## ⚡ Продвинутая настройка (Автозапуск через systemd)
+```
 
-Чтобы агент запускался автоматически вместе с сервером, создайте **systemd-сервис**.
+*(Для сохранения в nano: нажмите `Ctrl+O`, `Enter`, затем `Ctrl+X`)*
 
-1. Создайте файл `/etc/systemd/system/serverpulse-agent.service`:
+#### 3. Запуск
+
+Запустите агента одной командой:
 
 ```bash
-sudo nano /etc/systemd/system/serverpulse-agent.service
+docker-compose up -d --build
+
 ```
 
-2. Вставьте содержимое (замените `User` на имя вашего пользователя и `WorkingDirectory/ExecStart` на реальные пути):
+#### 4. Управление
 
-```ini
-[Unit]
-Description=ServerPulse Monitoring Agent
-After=network.target
-
-[Service]
-User=your_username
-WorkingDirectory=/home/your_username/path/to/agent
-ExecStart=/usr/bin/python3 /home/your_username/path/to/agent/agent.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-3. Включите и запустите службу:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable serverpulse-agent.service
-sudo systemctl start serverpulse-agent.service
-```
-
-4. Проверьте статус:
-
-```bash
-sudo systemctl status serverpulse-agent.service
-```
-
-Теперь агент будет стартовать автоматически при загрузке системы.
-
-> 📘 *Более подробные инструкции ищите в Google по запросу:*  
-> *`how to run python script as service systemd ubuntu`*
+* **Просмотр логов:** `docker-compose logs -f`
+* **Остановка:** `docker-compose down`
+* **Автозапуск:** Агент будет автоматически запускаться при старте системы благодаря настройке `restart: always`.
 
 ---
 
-## 🧪 Проверка работоспособности
+## 🇺🇸 English
 
-После запуска агента вы увидите в консоли:
+# Lightweight Server Monitoring Agent
 
-```
-[*] Агент успешно инициализирован.
-[+] Данные отправлены: CPU 12%, RAM 45%, HDD 67%
-```
+ServerPulse Agent is a real-time server monitoring tool. We use **Docker**, so there is no need to manually install Python or any dependencies.
 
-В основном боте ServerPulse через команду `/status` вы увидите ваш сервер и его метрики.
+### 🚀 Quick Start
 
----
+#### 1. Install Docker
 
-## 📄 Лицензия
-
-Проект распространяется под лицензией MIT. Вы можете свободно использовать и изменять его.
-
----
-
-# 🚀 ServerPulse Agent (English)
-
-[![Python Version](https://shields.io)](https://python.org)
-[![License: MIT](https://shields.io)](https://opensource.org)
-[![Status](https://shields.io)]()
-
-A lightweight monitoring agent for your server.
-
----
-
-## 🛠️ Quick Start
-
-### 1. Install Python & pip
+If Docker is not installed yet, run:
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-pip -y
+sudo apt install docker.io docker-compose -y
+sudo systemctl enable --now docker
+
 ```
 
-> 📌 *If your Ubuntu/Debian version doesn't have `python3-pip`, try `sudo apt install python3-pip` or `sudo apt install python3-venv`. Google: `ubuntu install pip` if needed.*
+#### 2. Configuration
 
-### 2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure
+Create your `.env` file from the example:
 
 ```bash
 cp .env.example .env
+
 ```
 
-Edit `.env` and set your token and server URL:
+Open it for editing:
 
-```env
+```bash
+nano .env
+
+```
+
+Add your details:
+
+```text
 API_TOKEN=your_token_here
-API_URL=https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update
+API_URL=[https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update](https://professor-clarinet-penalty.ngrok-free.dev/api/v1/update)
+
 ```
 
-### 4. Run
+*(To save in nano: press `Ctrl+O`, `Enter`, then `Ctrl+X`)*
+
+#### 3. Run
+
+Launch the agent:
 
 ```bash
-python3 agent.py
-```
-
-> ⚠️ *After a server reboot, you'll need to restart the agent (see Auto-start section below).*
-
----
-
-## ⚡ Auto-start with systemd (optional)
-
-To make the agent start automatically on boot, set up a systemd service.
-
-1. Create file `/etc/systemd/system/serverpulse-agent.service`:
-
-```bash
-sudo nano /etc/systemd/system/serverpulse-agent.service
-```
-
-2. Fill with (replace paths and username with yours):
-
-```ini
-[Unit]
-Description=ServerPulse Agent
-After=network.target
-
-[Service]
-User=your_username
-WorkingDirectory=/home/your_username/path/to/agent
-ExecStart=/usr/bin/python3 /home/your_username/path/to/agent/agent.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-3. Enable and start:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable serverpulse-agent.service
-sudo systemctl start serverpulse-agent.service
-```
-
-4. Check status:
-
-```bash
-sudo systemctl status serverpulse-agent.service
-```
-
-> 📘 *For more details, search Google: `how to run python script as service systemd ubuntu`*
-
----
-
-## 🧪 Testing
-
-After starting the agent, you'll see:
+docker-compose up -d --build
 
 ```
-[*] Агент успешно инициализирован.
-[+] Данные отправлены: CPU 12%, RAM 45%, HDD 67%
-```
 
-In the main ServerPulse bot, use `/status` to see your server and its metrics.
+#### 4. Management
+
+* **View logs:** `docker-compose logs -f`
+* **Stop:** `docker-compose down`
+* **Auto-start:** The agent restarts automatically on system boot thanks to `restart: always`.
 
 ---
 
 ## 📄 License
 
-MIT License.
+MIT.
+
 ```
 
+---
+
+### А теперь проверь, чтобы у тебя в папке лежали эти два файла:
+### Just check if these files exists in your dir
+**1. Файл `Dockerfile`** (пусть лежит рядом с `agent.py`):
+```dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["python", "agent.py"]
+
+```
+
+**2. Файл `docker-compose.yml**` (тоже в корне):
+
+```yaml
+services:
+  agent:
+    build: .
+    container_name: serverpulse-agent
+    restart: always
+    env_file:
+      - .env
+
+```
 

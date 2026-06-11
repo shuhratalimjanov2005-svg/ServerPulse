@@ -1,0 +1,7 @@
+services:
+  agent:
+    build: .
+    container_name: serverpulse-agent
+    restart: always
+    env_file:
+      - .env
